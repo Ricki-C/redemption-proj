@@ -24,6 +24,7 @@ class Coupon:
         """Return the 12-digit barcode of the coupon."""
         return self.numeric_barcode
 
+
 class PercentDiscountCoupon(Coupon):
 
     def __init__(
@@ -38,10 +39,10 @@ class PercentDiscountCoupon(Coupon):
             numeric_barcode, expiration_date, min_purchase, description
         )
         self.percent_value = percent_value
-        
-    def get_barcode(self) -> str:
-        """Return the 12-digit barcode of the coupon."""
-        return self.numeric_barcode
+
+    # def get_barcode(self) -> str:
+    #     """Return the 12-digit barcode of the coupon."""
+    #     return self.numeric_barcode
 
     def discount_amount(self, subtotal: float):
         if subtotal >= self.min_purchase and (not self._is_expired()):
@@ -65,9 +66,9 @@ class FixedDiscountCoupon(Coupon):
         )
         self.fixed_value = fixed_value  # should be float
 
-    def get_barcode(self) -> str:
-        """Return the 12-digit barcode of the coupon."""
-        return self.numeric_barcode
+    # def get_barcode(self) -> str:
+    #     """Return the 12-digit barcode of the coupon."""
+    #     return self.numeric_barcode
 
     def discount_amount(self, subtotal: float):
         if subtotal >= self.min_purchase and not self._is_expired():

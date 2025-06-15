@@ -58,7 +58,12 @@ class POSSystem:
                 kind = self._identify_barcode_type(num)
                 if kind == "product":
                     prod = self.store.get_product(num)
-                    if prod and prod.is_in_stock():
+                    if (
+                        prod
+                        and prod.is_in_stock()
+                        and self.cart.products.count(prod)
+                        < prod.get_quantity()
+                    ):
                         self.cart.add_item(prod)
 
                 elif kind == "coupon":
@@ -176,4 +181,24 @@ def pos_doctests(self):
     ...         calculated_types.append(barcode_type)
     >>> expected_types == calculated_types
     True
+
+    >>> pos = POSSystem(
+    ...     'db-data/inventory.csv',
+    ...     'db-data/memberships.csv',
+    ...     'db-data/coupons.csv'
+    ... )
+    >>> pos.process_barcodes('cart-data/test_scan_binary.txt')
+    >>> cart = pos.get_current_cart()
+    >>> items = cart.get_items()
+    >>> len(items)
+    260
+    >>> item_names = [item.get_name() for item in items]
+    >>> 'Apple' in item_names and 'Cheddar Cheese' in item_names
+    True
+    >>> item_names.count("Apple")
+    200
+    >>> item_names.count('Cheddar Cheese')
+    60
+
+
     """

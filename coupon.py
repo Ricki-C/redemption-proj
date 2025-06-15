@@ -20,6 +20,10 @@ class Coupon:
     def discount_amount(self, subtotal: float):
         pass
 
+    def get_barcode(self) -> str:
+        """Return the 12-digit barcode of the coupon."""
+        return self.numeric_barcode
+
 class PercentDiscountCoupon(Coupon):
 
     def __init__(

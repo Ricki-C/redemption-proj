@@ -1,0 +1,5 @@
+numeric_barcode,expiration_date,discount_type,discount_value,min_purchase,description
+149234073227,2026-07-31,percent,15.0,30.00,15% off on orders over $30
+167586463312,2026-06-15,fixed,5.00,0,$5 off any single item
+120726178637,2024-12-31,percent,10,0.00,10% off entire purchase
+178201474446,2024-05-01,fixed,2.50,10.00,$2.50 off orders ≥ $10

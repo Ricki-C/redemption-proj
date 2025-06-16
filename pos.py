@@ -199,6 +199,34 @@ def pos_doctests(self):
     200
     >>> item_names.count('Cheddar Cheese')
     60
+    >>> updated_memerships_exists = False
+    >>> try:
+    ...     f = open('db-data/updated_memberships.csv')
+    ...     f.close()
+    ...     updated_memerships_exists = True
+    ... except FileNotFoundError:
+    ...     updated_memerships_exists = False
+    >>> updated_memerships_exists
+    True
+    >>> updated_inventory_exists = False
+    >>> updated_inventory_exists = False
+    >>> try:
+    ...     f = open('db-data/updated_inventory.csv')
+    ...     f.close()
+    ...     updated_inventory_exists = True
+    ... except FileNotFoundError:
+    ...     updated_inventory_exists = False
+    >>> updated_inventory_exists
+    True
+    >>> expected_types = ['coupon', 'membership', 'product', 'product']
+    >>> calculated_types = []
+    >>> with open('cart-data/scan_1.txt', 'r') as f:
+    ...     for line in f:
+    ...         numeric_barcode = line.strip()
+    ...         barcode_type = pos._identify_barcode_type(numeric_barcode)
+    ...         calculated_types.append(barcode_type)
+    >>> expected_types == calculated_types
+    True
 
 
     """

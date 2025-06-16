@@ -61,7 +61,10 @@ class POSSystem:
                     if (
                         prod
                         and prod.is_in_stock()
-                        and self.cart.products.count(prod)
+                        and sum(
+                            p.numeric_barcode == prod.numeric_barcode
+                            for p in self.cart.products
+                        )
                         < prod.get_quantity()
                     ):
                         self.cart.add_item(prod)
